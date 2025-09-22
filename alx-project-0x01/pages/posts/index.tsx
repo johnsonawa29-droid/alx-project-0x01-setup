@@ -7,17 +7,17 @@ const posts: PostData[] = [
   { id: 2, title: "Second Post", body: "This is the second post." },
 ];
 
-const PostsPage: React.FC = () => {
+const PostsPage: React.FC = (): JSX.Element => {
   const [post, setPost] = useState<PostData | null>(null);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const openModal = (post: PostData) => {
     setPost(post);
-    setIsOpen(true);
+    setModalOpen(true);
   };
 
   const closeModal = () => {
-    setIsOpen(false);
+    setModalOpen(false);
     setPost(null);
   };
 
@@ -25,7 +25,7 @@ const PostsPage: React.FC = () => {
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">Posts</h1>
       <ul className="space-y-3">
-        {posts.map((p) => (
+        {posts.map((p: PostData) => (
           <li
             key={p.id}
             className="p-4 border rounded-md cursor-pointer hover:bg-gray-100"
@@ -36,7 +36,7 @@ const PostsPage: React.FC = () => {
         ))}
       </ul>
 
-      <PostModal isOpen={isOpen} onClose={closeModal} post={post} />
+      <PostModal isOpen={isModalOpen} onClose={closeModal} post={post} />
     </div>
   );
 };
